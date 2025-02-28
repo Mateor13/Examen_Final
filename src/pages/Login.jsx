@@ -1,13 +1,13 @@
 import axios from "axios";
 import { useState, useContext } from "react";
 import AuthContext from "../context/AuthProvider";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {ToastContainer, toast} from 'react-toastify'
 import Mensaje from "../components/Alerts/Mensajes";
 const Login = () => {
     const [mensaje, setMensaje] = useState({})
     const navigate = useNavigate()
-    const {setAuth, setEstado} = useContext(AuthContext)
+    const {setAuth} = useContext(AuthContext)
 
     const [form, setForm] = useState({
         email: '',
@@ -37,7 +37,6 @@ const Login = () => {
             const respuesta = await axios.post(url, form);
             localStorage.setItem('token', respuesta.data.token);
             setAuth(respuesta.data);
-            console.log(respuesta.data)
             navigate('/dashboard')
         } catch(error){
             toast.error(error?.response.data.message)

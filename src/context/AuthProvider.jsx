@@ -9,8 +9,7 @@ const AuthProvider = ({children}) => {
     const perfil = async() => {
         try {
             const url = `${import.meta.env.VITE_BACKEND_URL}/visualizar/perfil`;
-            const token = localStorage.getItem('token'); 
-            console.log(token)
+            const token = localStorage.getItem('token');
             const respuesta = await axios.get(url, {
                 headers: {
                     'Authorization': `Bearer ${token}`
