@@ -28,6 +28,12 @@ const Login = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        if (form.email.trim() === '' || form.password.trim() === '') {
+            toast.error("Por favor, completa todos los campos.");
+            return;
+        }
+
         if (!validateEmail(form.email)) {
             toast.error("Por favor, ingresa un correo electrónico válido.");
             return;
@@ -36,8 +42,15 @@ const Login = () => {
             const url =`${import.meta.env.VITE_BACKEND_URL}/login`;
             const respuesta = await axios.post(url, form);
             localStorage.setItem('token', respuesta.data.token);
+            const perfil = `${import.meta.env.VITE_BACKEND_URL}/visualizar/perfil`;
+            const perfilRespuesta = await axios.get(perfil, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`
+                }
+            });
             console.log(localStorage.getItem('token'))
-            setAuth(respuesta.data);
+            setAuth(perfilRespuesta.data.usuario);
             navigate('/dashboard')
         } catch(error){
             toast.error(error?.response.data.message)

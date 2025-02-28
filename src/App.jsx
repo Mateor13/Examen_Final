@@ -1,6 +1,6 @@
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import Login from './pages/Login';
-import Auth from './layout/Auth';
+import {Auth, NoAuth} from './layout/Auth';
 import Dashboard from './pages/Dashboard';
 import {AuthProvider} from './context/AuthProvider';
 function App() {
@@ -8,7 +8,9 @@ function App() {
         <AuthProvider>
             <BrowserRouter>
                 <Routes>
-                    <Route path="/" element={<Login />} />
+                    <Route path="/" element={<NoAuth />}>
+                        <Route index element={<Login />} />
+                    </Route>
                     <Route path="/dashboard" element={<Auth />}>
                         <Route index element={<Dashboard />} />
                     </Route>
