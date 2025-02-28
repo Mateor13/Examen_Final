@@ -1,14 +1,31 @@
-import {useContext} from 'react'
+import {useContext, useEffect} from 'react'
 import AuthContext from '../context/AuthProvider'
-import {Link, Navigate, Outlet, useLocation} from 'react-router-dom'
+import {Link, useNavigate, Outlet} from 'react-router-dom'
 import logo from '../assets/education.png'
 import students from '../assets/students.png'
 import registrations from '../assets/registrations.png'
 
-const Dashboard = () => {
+const Dashboard =  () => {
 
     const {auth} = useContext(AuthContext)
-    console.log(auth)
+    const navigate = useNavigate()
+
+    const handleLogout = () => {
+        localStorage.removeItem('token');
+        navigate('/');
+    };
+
+    useEffect(() => {
+        if (!auth.nombre) {
+            // Redirigir o mostrar un mensaje de carga si auth.nombre no está disponible
+            navigate('/dashboard');
+        }
+    }, [auth, navigate]);
+
+    if (!auth.nombre) {
+        <div className='w-full h-screen bg-blue-700 flex justify-center items-center text-white text-2xl'>Cargando...</div>;
+        navigate('/dashboard');
+    }
     
     return (
         <div className='w-full h-screen bg-blue-700 flex flex-col justify-center items-center'>
@@ -36,8 +53,9 @@ const Dashboard = () => {
                     </div>
                 </Link>
             </div>
-            <Link to='/' onClick={localStorage.removeItem('token')} className='mb-7 p-7 rounded-lg bg-red-500 text-white text-center block mt-10 hover:bg-red-700'>Cerrar sesión</Link>
-        </div>
+            <button onClick={handleLogout} className='mb-7 p-7 rounded-lg bg-red-500 text-white text-center block mt-10 hover:bg-red-700'>
+                Cerrar sesión
+            </button>        </div>
     );
 }
 export default Dashboard

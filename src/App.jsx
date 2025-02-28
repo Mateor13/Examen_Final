@@ -12,6 +12,7 @@ function App() {
                     <Route path="/dashboard" element={<Auth />}>
                         <Route index element={<Dashboard />} />
                     </Route>
+                    <Route path="*" element={<h1>404 Not Found</h1>} />
                 </Routes>
             </BrowserRouter>
         </AuthProvider>

@@ -36,6 +36,7 @@ const Login = () => {
             const url =`${import.meta.env.VITE_BACKEND_URL}/login`;
             const respuesta = await axios.post(url, form);
             localStorage.setItem('token', respuesta.data.token);
+            console.log(localStorage.getItem('token'))
             setAuth(respuesta.data);
             navigate('/dashboard')
         } catch(error){
