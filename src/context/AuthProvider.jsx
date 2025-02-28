@@ -10,13 +10,13 @@ const AuthProvider = ({children}) => {
         try {
             const url = `${import.meta.env.VITE_BACKEND_URL}/visualizar/perfil`;
             const token = localStorage.getItem('token'); 
+            console.log(token)
             const respuesta = await axios.get(url, {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
             });
-            setAuth(respuesta.data)
-            console.log(respuesta.data)
+            setAuth(respuesta.data.usuario)
         } catch (error) {
             console.log(error);
         }
