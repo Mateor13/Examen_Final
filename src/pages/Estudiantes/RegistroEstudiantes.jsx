@@ -156,7 +156,6 @@ const RegistroEstudiante = () => {
                             <button type="submit" className="py-2 w-full block text-center bg-gray-700/100 text-slate-300 border rounded-xl hover:scale-100 duration-300 hover:bg-gray-900 hover:text-white">Registrar</button>
                         </div>
                     </form>
-                    <button onClick={() => navigate('/dashboard')} className="py-2 w-full block text-center bg-gray-700/100 text-slate-300 border rounded-xl hover:scale-100 duration-300 hover:bg-gray-900 hover:text-white mt-4">Regresar al Dashboard</button>
                 </div>
             </div>
         </>

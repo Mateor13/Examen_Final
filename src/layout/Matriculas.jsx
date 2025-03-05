@@ -3,7 +3,7 @@ import { Link, Outlet, useLocation, Navigate } from 'react-router-dom';
 import  {AuthContext}  from '../context/AuthProvider';
 import { FaBars, FaTimes } from 'react-icons/fa';
 
-const DashboardMaterias = () => {
+const DashboardMatriculas = () => {
     const location = useLocation();
     const urlActual = location.pathname;
     const { auth } = useContext(AuthContext);
@@ -32,10 +32,10 @@ const DashboardMaterias = () => {
                             <Link to='/dashboard' className={`${urlActual === '/dashboard' ? 'text-slate-200 bg-gray-900 px-3 py-2 rounded-md text-center' : 'text-slate-600'} text-xl block mt-2 hover:text-slate-600`}>Regresar a Inicio</Link>
                         </li>
                         <li className="text-center">
-                            <Link to='/dashboard/materias/registrar' className={`${urlActual === '/dashboard/materias/registrar' ? 'text-slate-100 bg-gray-900 px-3 py-2 rounded-md text-center' : 'text-slate-600'} text-xl block mt-2 hover:text-slate-600`}>Crear Materia</Link>
+                            <Link to='/dashboard/matriculas/registrar' className={`${urlActual === '/dashboard/matriculas/registrar' ? 'text-slate-100 bg-gray-900 px-3 py-2 rounded-md text-center' : 'text-slate-600'} text-xl block mt-2 hover:text-slate-600`}>Registrar Matricula</Link>
                         </li>
                         <li className="text-center">
-                            <Link to='/dashboard/materias/gestionar' className={`${urlActual === '/dashboard/materias/gestionar' ? 'text-slate-100 bg-gray-900 px-3 py-2 rounded-md text-center' : 'text-slate-600'} text-xl block mt-2 hover:text-slate-600`}>Gestionar Materia</Link>
+                            <Link to='/dashboard/matriculas/gestionar' className={`${urlActual === '/dashboard/matriculas/gestionar' ? 'text-slate-100 bg-gray-900 px-3 py-2 rounded-md text-center' : 'text-slate-600'} text-xl block mt-2 hover:text-slate-600`}>Gestionar Matriculas</Link>
                         </li>
                     </ul>
                     <div className="mt-auto">
@@ -53,4 +53,4 @@ const DashboardMaterias = () => {
     );
 };
 
-export default DashboardMaterias;
+export default DashboardMatriculas;

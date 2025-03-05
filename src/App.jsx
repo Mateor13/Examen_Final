@@ -9,6 +9,12 @@ import { NotFound } from './pages/NotFound';
 import InicioEstudiantes from './pages/Estudiantes/InicioEstudiantes';
 import CrudEstudiantes from './pages/Estudiantes/CrudEstudiantes';
 import ActualizarEstudiante from './pages/Estudiantes/ActualizarEstudiante';
+import DashboardMaterias from './layout/Materias';
+import InicioMaterias from './pages/Materias/InicioMaterias';
+import RegistroMaterias from './pages/Materias/RegistroMaterias';
+import DashboardMatriculas from './layout/Matriculas';
+import InicioMatriculas from './pages/Matriculas/InicioMatriculas';
+import RegistroMatriculas from './pages/Matriculas/RegistroMatriculas';
 
 function App() {
     return (
@@ -27,11 +33,16 @@ function App() {
                         <Route path="gestionar" element={<CrudEstudiantes/>} />
                         <Route path="actualizar/:id" element={<ActualizarEstudiante/>} />
                     </Route>
-                    <Route path="/dashboard/materias" element={<DashboardEstudiantes />}>
-                        <Route index element={<InicioEstudiantes/>} />
-                        <Route path="registrar" element={<RegistroEstudiante />} />
+                    <Route path="/dashboard/materias" element={<DashboardMaterias />}>
+                        <Route index element={<InicioMaterias/>} />
+                        <Route path="registrar" element={<RegistroMaterias />} />
                         <Route path="gestionar" element={<CrudEstudiantes/>} />
                         <Route path="actualizar/:id" element={<ActualizarEstudiante/>} />
+                    </Route>
+
+                    <Route path="/dashboard/matriculas" element={<DashboardMatriculas />}>
+                        <Route index element={<InicioMatriculas/>} />
+                        <Route path="registrar" element={<RegistroMatriculas />} />
                     </Route>
                 
                     
