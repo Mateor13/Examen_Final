@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import AuthContext from '../context/AuthProvider';
+import {AuthContext} from '../context/AuthProvider';
 import { Link, useNavigate, Outlet } from 'react-router-dom';
 import logo from '../assets/education.png';
 import students from '../assets/students.png';
@@ -25,7 +25,7 @@ const Dashboard = () => {
                         <img src={logo} alt='subjects' className='w-16 h-16 md:w-24 md:h-24 mx-auto' />
                     </div>
                 </Link>
-                <Link to='/estudiantes'>
+                <Link to='/dashboard/estudiantes'>
                     <div className='bg-white p-8 md:p-12 rounded-lg shadow-lg w-full max-w-xs md:max-w-lg hover:bg-blue-500 hover:text-white'>
                         <small className='text-black text-center block my-4 md:my-6 text-lg md:text-xl'>Estudiantes</small>
                         <img src={students} alt='students' className='w-16 h-16 md:w-24 md:h-24 mx-auto' />
