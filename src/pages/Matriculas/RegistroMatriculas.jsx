@@ -72,15 +72,15 @@ const RegistroMatriculas = () => {
                             <div className="mb-3">
                                 <label className="mb-2 block text-sm font-semibold">Estudiante</label>
                                 <input type="text" placeholder="Ingrese el identificador del estudiante"
-                                    name='nombre'
-                                    value={form.nombre} onChange={handleChange}
+                                    name='id_estudiante'
+                                    value={form.id_estudiante} onChange={handleChange}
                                     className="block w-full rounded-md border border-gray-300 focus:border-purple-700 focus:outline-none focus:ring-1 focus:ring-purple-700 py-1 px-2 text-gray-500" />
                             </div>
                             <div className="mb-3">
                                 <label className="mb-2 block text-sm font-semibold">Materia</label>
                                 <input type="text" placeholder="Ingrese el identificador de la materia"
-                                    name='codigo'
-                                    value={form.codigo} onChange={handleChange}
+                                    name='id_materia'
+                                    value={form.id_materia} onChange={handleChange}
                                     className="block w-full rounded-md border border-gray-300 focus:border-purple-700 focus:outline-none focus:ring-1 focus:ring-purple-700 py-1 px-2 text-gray-500" />
                             </div>
                             <div className="mb-3">
