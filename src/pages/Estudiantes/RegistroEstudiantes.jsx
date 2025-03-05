@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useState, useContext } from "react";
-import AuthContext from "../../context/AuthProvider";
+import {AuthContext} from "../../context/AuthProvider";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
 import Mensaje from "../../components/Alerts/Mensajes";
