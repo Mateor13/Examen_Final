@@ -8,7 +8,6 @@ import Mensaje from "../../components/Alerts/Mensajes";
 const RegistroEstudiante = () => {
     const [mensaje, setMensaje] = useState({});
     const navigate = useNavigate();
-    const { setAuth } = useContext(AuthContext);
 
     const [form, setForm] = useState({
         nombre: '',
@@ -29,28 +28,50 @@ const RegistroEstudiante = () => {
         });
     };
 
+    const validarEmail = (email) => {
+        const re = /\S+@\S+\.\S+/;
+        return re.test(email);
+    }
+
+    const validarFormulario = () => {
+        if (!form.nombre || !form.apellido || !form.cedula || !form.fecha_nacimiento || !form.ciudad || !form.direccion || !form.telefono || !form.email) {
+            toast.error("Todos los campos son obligatorios");
+            return false;
+        }
+        if (form.cedula.length !== 10) {
+            toast.error("La cédula debe tener 10 dígitos");
+            return false;
+        }
+        if (form.telefono.length !== 10) {
+            toast.error("El teléfono debe tener 10 dígitos");
+            return false;
+        }
+        if (!validarEmail(form.email)) {
+            toast.error("El correo no es válido");
+            return false;
+        }
+
+        return true;
+    }
+
     const handleSubmit = async (e) => {
         e.preventDefault();
+        if (!validarFormulario()) {
+            setTimeout(() => {
+                setMensaje({});
+            }, 5000);
+            return;
+        }
         try {
             const url = `${import.meta.env.VITE_BACKEND_URL}/registrar/estudiantes`;
-            const respuesta = await axios.post(url, form);
-            localStorage.setItem('token', respuesta.data.token);
-            console.log(localStorage.getItem('token'));
-            setAuth(respuesta.data);
-            toast.success("Registro exitoso");
-            setForm({
-                nombre: '',
-                apellido: '',
-                cedula: '',
-                fecha_nacimiento: '',
-                ciudad: '',
-                direccion: '',
-                telefono: '',
-                email: '',
-                password: ''
+            const respuesta = await axios.post(url, form, {
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`
+                }
             });
+            console.log(respuesta)
+            toast.success(respuesta.data.message);
         } catch (error) {
-            /*Revisar :3*/
             if (error.response && error.response.data && error.response.data.message) {
                 toast.error(error.response.data.message);
             } else {
@@ -98,6 +119,7 @@ const RegistroEstudiante = () => {
                                 <label className="mb-2 block text-sm font-semibold">Fecha de Nacimiento</label>
                                 <input type="date" placeholder="Ingresa tu fecha de nacimiento"
                                     name='fecha_nacimiento'
+                                    max={new Date().toISOString().split('T')[0]}
                                     value={form.fecha_nacimiento} onChange={handleChange}
                                     className="block w-full rounded-md border border-gray-300 focus:border-purple-700 focus:outline-none focus:ring-1 focus:ring-purple-700 py-1 px-2 text-gray-500" />
                             </div>

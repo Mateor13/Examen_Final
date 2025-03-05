@@ -7,6 +7,8 @@ import RegistroEstudiante from './pages/Estudiantes/RegistroEstudiantes';
 import DashboardEstudiantes from './layout/Estudiantes';
 import { NotFound } from './pages/NotFound';
 import InicioEstudiantes from './pages/Estudiantes/InicioEstudiantes';
+import CrudEstudiantes from './pages/Estudiantes/CrudEstudiantes';
+import ActualizarEstudiante from './pages/Estudiantes/ActualizarEstudiante';
 
 function App() {
     return (
@@ -22,7 +24,16 @@ function App() {
                     <Route path="/dashboard/estudiantes" element={<DashboardEstudiantes />}>
                         <Route index element={<InicioEstudiantes/>} />
                         <Route path="registrar" element={<RegistroEstudiante />} />
+                        <Route path="gestionar" element={<CrudEstudiantes/>} />
+                        <Route path="actualizar/:id" element={<ActualizarEstudiante/>} />
                     </Route>
+                    <Route path="/dashboard/materias" element={<DashboardEstudiantes />}>
+                        <Route index element={<InicioEstudiantes/>} />
+                        <Route path="registrar" element={<RegistroEstudiante />} />
+                        <Route path="gestionar" element={<CrudEstudiantes/>} />
+                        <Route path="actualizar/:id" element={<ActualizarEstudiante/>} />
+                    </Route>
+                
                     
                     <Route path="*" element={<NotFound/>} />
                 </Routes>

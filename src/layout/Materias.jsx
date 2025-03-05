@@ -3,7 +3,7 @@ import { Link, Outlet, useLocation, Navigate } from 'react-router-dom';
 import  {AuthContext}  from '../context/AuthProvider';
 import { FaBars, FaTimes } from 'react-icons/fa';
 
-const DashboardEstudiantes = () => {
+const DashboardMaterias = () => {
     const location = useLocation();
     const urlActual = location.pathname;
     const { auth } = useContext(AuthContext);
@@ -53,4 +53,4 @@ const DashboardEstudiantes = () => {
     );
 };
 
-export default DashboardEstudiantes;
+export default DashboardMaterias;

@@ -19,7 +19,7 @@ const Dashboard = () => {
         <div className='w-full min-h-screen bg-blue-700 flex flex-col justify-center items-center p-4'>
             <small className='font-sans text-white text-center block mt-10 text-3xl md:text-5xl'>Bienvenid@ {auth.nombre}</small>
             <div className='w-full flex flex-col md:flex-row justify-around items-center mt-10 space-y-6 md:space-y-0 md:space-x-6'>
-                <Link to='/materias'>
+                <Link to='/dashboard/materias'>
                     <div className='bg-white p-8 md:p-12 rounded-lg shadow-lg w-full max-w-xs md:max-w-lg hover:bg-blue-500 hover:text-white'>
                         <small className='text-black text-center block my-4 md:my-6 text-lg md:text-xl'>Materias</small>
                         <img src={logo} alt='subjects' className='w-16 h-16 md:w-24 md:h-24 mx-auto' />
@@ -31,7 +31,7 @@ const Dashboard = () => {
                         <img src={students} alt='students' className='w-16 h-16 md:w-24 md:h-24 mx-auto' />
                     </div>
                 </Link>
-                <Link to='/matriculas'>
+                <Link to='/dashboard/matriculas'>
                     <div className='bg-white p-8 md:p-12 rounded-lg shadow-lg w-full max-w-xs md:max-w-lg hover:bg-blue-500 hover:text-white'>
                         <small className='text-black text-center block my-4 md:my-6 text-lg md:text-xl'>Matrículas</small>
                         <img src={registrations} alt='enrollments' className='w-16 h-16 md:w-24 md:h-24 mx-auto' />
