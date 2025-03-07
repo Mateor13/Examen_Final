@@ -71,16 +71,19 @@ const RegistroEstudiante = () => {
             });
             console.log(respuesta)
             toast.success(respuesta.data.message);
+
+            setForm({});
+            setTimeout(() => {
+                setMensaje({});
+            }, 5000);
+
         } catch (error) {
             if (error.response && error.response.data && error.response.data.message) {
                 toast.error(error.response.data.message);
             } else {
                 toast.error("Error al registrar estudiante");
             };
-            setForm({});
-            setTimeout(() => {
-                setMensaje({});
-            }, 5000);
+            
         }
     };
 

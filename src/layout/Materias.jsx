@@ -45,7 +45,7 @@ const DashboardMaterias = () => {
             </div>
 
             <div className='flex-1 flex flex-col justify-between h-screen bg-gray-100'>
-                <div className='overflow-y-scroll p-8'>
+                <div className='overflow-y-scroll'>
                     {autenticado ? <Outlet /> : <Navigate to="/login" />}
                 </div>
             </div>

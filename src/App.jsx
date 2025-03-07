@@ -15,6 +15,7 @@ import RegistroMaterias from './pages/Materias/RegistroMaterias';
 import DashboardMatriculas from './layout/Matriculas';
 import InicioMatriculas from './pages/Matriculas/InicioMatriculas';
 import RegistroMatriculas from './pages/Matriculas/RegistroMatriculas';
+import CrudMaterias from './pages/Materias/CrudMaterias';
 
 function App() {
     return (
@@ -36,7 +37,7 @@ function App() {
                     <Route path="/dashboard/materias" element={<DashboardMaterias />}>
                         <Route index element={<InicioMaterias/>} />
                         <Route path="registrar" element={<RegistroMaterias />} />
-                        <Route path="gestionar" element={<CrudEstudiantes/>} />
+                        <Route path="gestionar" element={<CrudMaterias/>} />
                         <Route path="actualizar/:id" element={<ActualizarEstudiante/>} />
                     </Route>
 

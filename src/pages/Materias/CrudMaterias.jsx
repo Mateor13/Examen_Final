@@ -4,123 +4,118 @@ import { toast } from 'react-toastify';
 import { FaEdit, FaTrash } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 
-const CrudEstudiantes = () => {
-    const [estudiantes, setEstudiantes] = useState([]);
+const CrudMaterias = () => {
+    const [materias, setMaterias] = useState([]);
     const [search, setSearch] = useState('');
     const navigate = useNavigate();
 
     useEffect(() => {
-        const listaEstudiantes = async () => {
+        const listaMaterias = async () => {
             try {
-                const url = `${import.meta.env.VITE_BACKEND_URL}/listado/estudiantes`;
+                const url = `${import.meta.env.VITE_BACKEND_URL}/listado/materias`;
                 const respuesta = await axios.get(url, {
                     headers: {
                         'Authorization': `Bearer ${localStorage.getItem('token')}`
                     }
                 });
-                setEstudiantes(respuesta.data.todos_estudiantes);
+                setMaterias(respuesta.data.todas_materias);
             } catch (error) {
-                toast.error("Error al cargar los estudiantes");
+                console.log(error)
+                toast.error(error?.response.data.message || "Error al cargar las materias");
             }
         };
-        listaEstudiantes();
+        listaMaterias();
     }, []);
 
     const handleSearch = async (e) => {
         e.preventDefault();
         try {
-            const url = `${import.meta.env.VITE_BACKEND_URL}/buscar/estudiantes/${search}`;
+            const url = `${import.meta.env.VITE_BACKEND_URL}/buscar/materias/${search}`;
             const respuesta = await axios.get(url, {
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem('token')}`
                 }
             });
-            setEstudiantes([respuesta.data.estudiante]);
+            console.log(respuesta.data);
+            setMaterias([respuesta.data.materia]);
         } catch (error) {
-            toast.error("Error al buscar el estudiante");
+            console.log(error)
+            
         }
     };
 
     const handleDelete = async (id) => {
         try {
-            const url = `${import.meta.env.VITE_BACKEND_URL}/eliminar/estudiantes/${id}`;
+            const url = `${import.meta.env.VITE_BACKEND_URL}/eliminar/materias/${id}`;
             await axios.delete(url, {
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem('token')}`
                 }
             });
-            setEstudiantes(prevEstudiantes => prevEstudiantes.filter(estudiante => estudiante._id !== id));
-            toast.success("Estudiante eliminado correctamente");
+            setMaterias(prevEstudiantes => prevEstudiantes.filter(estudiante => estudiante._id !== id));
+            toast.success("materia eliminada correctamente");
         } catch (error) {
-            toast.error("Error al eliminar el estudiante");
+            toast.error(error?.response.data.message || "Error al eliminar la materia");
         }
     };
 
     const handleEdit = (id) => {
-        navigate(`/dashboard/estudiantes/actualizar/${id}`);
+        navigate(`/dashboard/materias/actualizar/${id}`);
     };
 
     const handleAdd = () => {
-        navigate('/dashboard/estudiantes/registrar');
+        navigate('/dashboard/materias/registrar');
     };
 
     return (
         <div className="w-full h-screen bg-blue-700 bg-no-repeat bg-cover bg-center flex justify-center items-center">
             <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-4xl overflow-x-auto">
-                <h1 className="text-2xl font-bold mb-4 text-center">Listado de Estudiantes</h1>
+                <h1 className="text-2xl font-bold mb-4 text-center">Listado de Materias</h1>
                 <div className="mb-4 flex justify-between">
                     <form onSubmit={handleSearch} className="flex w-full max-w-md">
                         <input
                             type="text"
-                            placeholder="Buscar por cédula"
+                            placeholder="Buscar por nombre"
                             value={search}
                             onChange={(e) => setSearch(e.target.value)}
                             className="block w-full rounded-md border border-gray-300 py-1 px-2"
                         />
                         <button type="submit" className="ml-2 py-1 px-4 bg-blue-500 text-white rounded-md">Buscar</button>
                     </form>
-                    <button onClick={handleAdd} className="py-1 px-4 bg-green-500 text-white rounded-md">Agregar Estudiante</button>
+                    <button onClick={handleAdd} className="py-1 px-4 bg-green-500 text-white rounded-md">Agregar Materia</button>
                 </div>
                 <div className="overflow-x-auto">
                     <table className="min-w-full bg-white">
                         <thead>
                             <tr>
                                 <th className="py-2">Acciones</th>
+                                <th className="py-2">Código</th>
                                 <th className="py-2">Nombre</th>
-                                <th className="py-2">Apellido</th>
-                                <th className="py-2">Cédula</th>
-                                <th className="py-2">Fecha de Nacimiento</th>
-                                <th className="py-2">Ciudad</th>
-                                <th className="py-2">Dirección</th>
-                                <th className="py-2">Teléfono</th>
-                                <th className="py-2">Correo</th>
+                                <th className="py-2">Descripción</th>
+                                <th className="py-2">Créditos</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {Array.isArray(estudiantes) && estudiantes.length > 0 ? (
-                                estudiantes.map(estudiante => (
-                                    <tr key={estudiante._id}>
+                            {Array.isArray(materias) && materias.length > 0 ? (
+                                materias.map(materia => (
+                                    <tr key={materia._id}>
                                         <td className="border px-4 py-2 flex justify-around">
-                                            <button onClick={() => handleEdit(estudiante.cedula)} className="text-blue-500">
+                                            <button onClick={() => handleEdit(materia.nombre)} className="text-blue-500">
                                                 <FaEdit />
                                             </button>
-                                            <button onClick={() => handleDelete(estudiante._id)} className="text-red-500">
+                                            <button onClick={() => handleDelete(materia._id)} className="text-red-500">
                                                 <FaTrash />
                                             </button>
                                         </td>
-                                        <td className="border px-4 py-2">{estudiante.nombre}</td>
-                                        <td className="border px-4 py-2">{estudiante.apellido}</td>
-                                        <td className="border px-4 py-2">{estudiante.cedula}</td>
-                                        <td className="border px-4 py-2">{estudiante.fecha_nacimiento}</td>
-                                        <td className="border px-4 py-2">{estudiante.ciudad}</td>
-                                        <td className="border px-4 py-2">{estudiante.direccion}</td>
-                                        <td className="border px-4 py-2">{estudiante.telefono}</td>
-                                        <td className="border px-4 py-2">{estudiante.email}</td>
+                                        <td className="border px-4 py-2">{materia.codigo}</td>
+                                        <td className="border px-4 py-2">{materia.nombre}</td>
+                                        <td className="border px-4 py-2">{materia.descripcion}</td>
+                                        <td className="border px-4 py-2">{materia.creditos}</td>
                                     </tr>
                                 ))
                             ) : (
                                 <tr>
-                                    <td colSpan="9" className="text-center py-4">No se encontraron estudiantes</td>
+                                    <td colSpan="9" className="text-center py-4">No se encontraron materias</td>
                                 </tr>
                             )}
                         </tbody>
@@ -131,4 +126,4 @@ const CrudEstudiantes = () => {
     );
 };
 
-export default CrudEstudiantes;
+export default CrudMaterias;

@@ -25,10 +25,11 @@ const ActualizarEstudiante = () => {
                     }
                 });
                 setForm({
-                    ciudad: respuesta.data.ciudad,
-                    direccion: respuesta.data.direccion,
-                    telefono: respuesta.data.telefono,
-                    email: respuesta.data.email
+                    ciudad: respuesta.data.estudiante.ciudad,
+                    direccion: respuesta.data.estudiante.direccion,
+                    telefono: respuesta.data.estudiante.telefono,
+                    email: respuesta.data.estudiante.email,
+                    _id: respuesta.data.estudiante._id
                 });
             } catch (error) {
                 toast.error("Error al cargar el estudiante");
@@ -47,14 +48,15 @@ const ActualizarEstudiante = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const url = `${import.meta.env.VITE_BACKEND_URL}/actualizar/estudiantes/${id}`;
+            const url = `${import.meta.env.VITE_BACKEND_URL}/actualizar/estudiantes/${form._id}`;
+            delete form._id;
             await axios.patch(url, form, {
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem('token')}`
                 }
             });
             toast.success("Estudiante actualizado correctamente");
-            navigate('/estudiantes');
+            navigate('/dashboard/estudiantes/gestionar');
         } catch (error) {
             toast.error("Error al actualizar el estudiante");
         }
